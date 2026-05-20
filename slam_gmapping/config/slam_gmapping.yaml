@@ -46,4 +46,4 @@ slam_gmapping:
     transform_publish_period:  0.05       
     occ_thresh:           0.25
 
-    tf_delay:             0.1  
+    tf_delay:             0.1

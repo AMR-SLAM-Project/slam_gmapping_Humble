@@ -110,7 +110,7 @@ void SlamGmapping::startLiveSlam()
   sst_ = this->create_publisher<nav_msgs::msg::OccupancyGrid>("map", rclcpp::QoS(rclcpp::KeepLast(1)).transient_local().reliable());
   sstm_ = this->create_publisher<nav_msgs::msg::MapMetaData>("map_metadata", rclcpp::QoS(rclcpp::KeepLast(1)).transient_local().reliable());
   scan_filter_sub_ = std::make_shared<message_filters::Subscriber<sensor_msgs::msg::LaserScan>>
-          (this, "scan", rclcpp::SystemDefaultsQoS().get_rmw_qos_profile());
+          (this, "scan", rclcpp::SensorDataQoS().get_rmw_qos_profile());
 //    sub_ = this->create_subscription<sensor_msgs::msg::LaserScan>(
 //        "scan", rclcpp::SensorDataQoS(),
 //        std::bind(&SlamGmapping::laserCallback, this, std::placeholders::_1));
