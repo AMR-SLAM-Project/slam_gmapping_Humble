@@ -16,7 +16,14 @@ def generate_launch_description():
     return LaunchDescription([
         use_sim_time_arg,
         Node(
-            package='slam_gmapping', 
+            package='rviz2',
+            executable='rviz2',
+            name='rviz2',
+            arguments=['-d',os.path.join(get_package_share_directory("slam_gmapping"),'config','slam_gmapping.rviz')],
+            output='screen'
+        ),
+        Node(
+            package='slam_gmapping',
             executable='slam_gmapping_node',
             name='slam_gmapping',
             output='screen',
