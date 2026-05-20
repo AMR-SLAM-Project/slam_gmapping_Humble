@@ -4,7 +4,15 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 import os
 from launch.actions import DeclareLaunchArgument
+from launch.conditions import IfCondition
+from launch.substitutions import PythonExpression
 
+
+launch_rviz = LaunchConfiguration('launch_rviz')
+launch_rviz_arg = DeclareLaunchArgument(
+    'launch_rviz',
+    default_value='false'
+)
 
 def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time')
@@ -20,7 +28,8 @@ def generate_launch_description():
             executable='rviz2',
             name='rviz2',
             arguments=['-d',os.path.join(get_package_share_directory("slam_gmapping"),'config','slam_gmapping.rviz')],
-            output='screen'
+            output='screen',
+            condition=IfCondition(launch_rviz)
         ),
         Node(
             package='slam_gmapping',
